@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
@@ -10,8 +11,9 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
-<script src="{{'scroll-tracker.js' |  asset_url}}"></script>
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
+<link href="{{"https://fonts.googleapis.com/icon?family=Material+Icons"}}" media="print" onload="this.media='all'" rel="stylesheet">
+<script defer src="{{'scroll-tracker.js' |  asset_url}}"></script>
 
 <style>
   header-drawer {
@@ -293,9 +295,9 @@
           </div>
         {%- endif -%}
       </a>
-      <div class="scroll-tracker">
-        <p><span id="scrollDistance">0</span>Km</p>
-      </div>
+      {%- if section.settings.enable_scroll_tracking -%}
+        <div class="scroll-tracker"><p><span id="scrollDistance">0</span>Km</p><i class="material-icons" id="scroll-to-bottom">arrow_downward</i></div>
+      {%- endif -%}
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
@@ -593,6 +595,12 @@
       "default": true,
       "label": "t:sections.header.settings.enable_customer_avatar.label",
       "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_tracking",
+      "label": "Enable Scroll Tracking",
+      "default": true
     },
     {
       "type": "header",

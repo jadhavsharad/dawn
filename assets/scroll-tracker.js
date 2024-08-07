@@ -1,7 +1,5 @@
-
 let scrollDistance = parseFloat(localStorage.getItem('scrollDistance')) || 0;
 let prevScrollPosition = { x: window.scrollX, y: window.scrollY };
-
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('scrollDistance').textContent = scrollDistance.toFixed(2);
@@ -21,3 +19,7 @@ const updateScrollDistance = () => {
 };
 
 window.addEventListener('scroll', updateScrollDistance);
+
+document.getElementById('scroll-to-bottom').addEventListener('click', () => {
+  window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'})
+})
